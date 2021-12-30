@@ -27,6 +27,27 @@ class MyApp extends StatelessWidget {
       home: const MyHomePage(title: 'Flutter Layout Demo Page'),
     );
   }
+
+  Column _buildButtonColumn(Color color, IconData icon, String label) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon, color: color),
+        Container(
+          margin: const EdgeInsets.only(top: 8),
+          child: Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              color: color,
+            ),
+          ),
+        )
+      ],
+    );
+  }
 }
 
 class MyHomePage extends StatefulWidget {
@@ -79,29 +100,8 @@ class _MyHomePageState extends State<MyHomePage> {
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+          children: [
+            titleSection,
           ],
         ),
       ),
@@ -113,3 +113,38 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+Widget titleSection = Container(
+  padding: const EdgeInsets.all(32),
+  child: Row(
+    children: [
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: const Text(
+                "Pamukkale Travertenleri",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Text(
+              "Denizli Pamukkale",
+              style: TextStyle(
+                color: Colors.grey[500],
+              ),
+            )
+          ],
+        ),
+      ),
+      Icon(
+        Icons.star,
+        color: Colors.red[500],
+      ),
+      const Text("458")
+    ],
+  ),
+);
