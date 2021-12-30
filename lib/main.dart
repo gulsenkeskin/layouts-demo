@@ -96,6 +96,14 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
   );
 
+  Widget textSection = const Padding(
+    padding: EdgeInsets.all(32),
+    child: Text(
+    "Traverten bir çeşit kaya türüdür. Çeşitli nedenlere ve ortamlara bağlı, kimyasal reaksiyon sonucu çökelme ile oluşmaktadır. Bu reaksiyonlar sırasında kalsiyum hidro karbonat ile aşırı doymuş su yüze ulaşır, karbondioksit gazlanır ve geri kalanı karbondioksit yapıları olarak çöker. Termal sudaki karbondioksit ve atmosferdeki karbondioksit ile dengeye ulaşana kadar reaksiyon devam eder. Aynı zamanda bu reaksiyon; ortam sıcaklığı, hava koşulları ve suyun akış sürecinden de etkilenmektedir.",
+     //softwraptrue olarak ayarlandığında , metin satırları bir sözcük sınırına kaydırmadan önce sütun genişliğini dolduracaktır.
+      softWrap: true,
+    ),
+  );
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -124,10 +132,17 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
+        child: ListView(
           children: [
+            Image.asset(
+              'images/lake.jpg',
+            width: 600,
+            height: 240,
+              fit: BoxFit.cover,
+            ),
             titleSection,
             buttonSection,
+            textSection,
           ],
         ),
       ),
