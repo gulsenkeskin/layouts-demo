@@ -13,9 +13,14 @@ Future<String> loadAsset() async {
   return await rootBundle.loadString('assets/config.json');
 }
 
-
-class Travel extends StatelessWidget {
+class Travel extends StatefulWidget {
   const Travel({Key? key}) : super(key: key);
+
+  @override
+  State<Travel> createState() => _TravelState();
+}
+
+class _TravelState extends State<Travel> {
   @override
   Widget build(BuildContext context) {
     return MyHomePage(title: "Travel");
@@ -30,40 +35,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Widget titleSection = Container(
-    padding: const EdgeInsets.all(32),
-    child: Row(
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: const Text(
-                  "Pamukkale Travertenleri",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Text(
-                "Denizli Pamukkale",
-                style: TextStyle(
-                  color: Colors.grey[500],
-                ),
-              )
-            ],
-          ),
-        ),
-        Icon(
-          Icons.star,
-          color: Colors.red[500],
-        ),
-        const Text("458")
-      ],
-    ),
-  );
+  bool _isFavorited = true;
+  int _favoriteCount = 41;
+
+  void _toggleFavorite() {
+    setState(() {
+      if (_isFavorited) {
+        _favoriteCount -= 1;
+        _isFavorited = false;
+      } else {
+        _favoriteCount += 1;
+        _isFavorited = true;
+      }
+    });
+  }
 
   Widget textSection = const Padding(
     padding: EdgeInsets.all(32),
@@ -85,14 +70,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     );
 
-
     return Scaffold(
       appBar: AppBar(
-
         title: Text(widget.title),
       ),
       body: Center(
-
         child: ListView(
           children: [
             //const Image(image: AssetImage('images/pamukkale.jpg')),
@@ -103,11 +85,79 @@ class _MyHomePageState extends State<MyHomePage> {
             //
             // fit: BoxFit.cover,
             //),
-            titleSection,
+            titleSection(_favoriteCount, _isFavorited),
             buttonSection,
             textSection,
           ],
         ),
+      ),
+    );
+  }
+
+  titleSection(int favoriteCount, bool isFavorited) {
+    return Container(
+      padding: const EdgeInsets.all(32),
+      child: Row(
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: const Text(
+                        "Pamukkale Travertenleri",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Text(
+                      "Denizli Pamukkale",
+                      style: TextStyle(
+                        color: Colors.grey[500],
+                      ),
+                    ),
+
+                  ],
+                ),
+                Column(
+                  children: [
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(0),
+                              child: IconButton(
+                                padding: const EdgeInsets.all(0),
+                                alignment: Alignment.centerRight,
+                                icon: (_isFavorited
+                                    ? const Icon(Icons.star)
+                                    : const Icon(Icons.star_border)),
+                                color: Colors.red[500],
+                                onPressed: _toggleFavorite,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 18,
+                              child: SizedBox(
+                                child: Text('$_favoriteCount'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
