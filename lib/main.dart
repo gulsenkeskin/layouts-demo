@@ -1,177 +1,120 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:layouts_demo/screens/layout_demo.dart';
+import 'package:layouts_demo/screens/shopping_list.dart';
+
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MaterialApp(
+    home: MyApp(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    const appName = 'My Mix App';
+
     return MaterialApp(
-      title: 'Flutter Layout Demo',
+      title: appName,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+        brightness: Brightness.dark,
+        primaryColor: Colors.lightBlue[800],
+        fontFamily: 'Georgia',
+        textTheme: const TextTheme(
+          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+          headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+        ),
       ),
-      home: const MyHomePage(title: 'Flutter Layout Demo Page'),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(""),
+        ),
+        body: buildBody(context),
+      )
     );
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  Widget titleSection = Container(
-    padding: const EdgeInsets.all(32),
-    child: Row(
+  buildBody(BuildContext context) {
+    return Column(
       children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: const Text(
-                  "Pamukkale Travertenleri",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Text(
-                "Denizli Pamukkale",
-                style: TextStyle(
-                  color: Colors.grey[500],
-                ),
-              )
-            ],
-          ),
-        ),
-        Icon(
-          Icons.star,
-          color: Colors.red[500],
-        ),
-        const Text("458")
-      ],
-    ),
-  );
-
-  Widget textSection = const Padding(
-    padding: EdgeInsets.all(32),
-    child: Text(
-    "Traverten bir çeşit kaya türüdür. Çeşitli nedenlere ve ortamlara bağlı, kimyasal reaksiyon sonucu çökelme ile oluşmaktadır. Bu reaksiyonlar sırasında kalsiyum hidro karbonat ile aşırı doymuş su yüze ulaşır, karbondioksit gazlanır ve geri kalanı karbondioksit yapıları olarak çöker. Termal sudaki karbondioksit ve atmosferdeki karbondioksit ile dengeye ulaşana kadar reaksiyon devam eder. Aynı zamanda bu reaksiyon; ortam sıcaklığı, hava koşulları ve suyun akış sürecinden de etkilenmektedir.",
-     //softwraptrue olarak ayarlandığında , metin satırları bir sözcük sınırına kaydırmadan önce sütun genişliğini dolduracaktır.
-      softWrap: true,
-    ),
-  );
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-
-    Color color = Theme.of(context).primaryColor;
-    Widget buttonSection = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _buildButtonColumn(color, Icons.call, "CALL"),
-        _buildButtonColumn(color, Icons.near_me, "ROUTE"),
-        _buildButtonColumn(color, Icons.share, "SHARE"),
+        Expanded(child: Row(children: [
+          shoppingListButton(context),
+          layoutDemoButton(context),
+        ])),
       ],
     );
+  }
 
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: ListView(
-          children: [
-            Image.asset(
-              'images/lake.jpg',
-            width: 600,
-            height: 240,
-              fit: BoxFit.cover,
+  shoppingListButton(BuildContext context) {
+    return Flexible(
+      fit: FlexFit.tight,
+      flex: 1,
+      child: ElevatedButton(
+        child: Row(
+          children: <Widget>[
+            Icon(
+              Icons.checklist  ,
+              color: Colors.white,
             ),
-            titleSection,
-            buttonSection,
-            textSection,
+            SizedBox(
+              width: 8.0,
+            ),
+            const Text("Shopping List"),
           ],
         ),
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ShoppingList(
+                        products: [
+                          Product(name: 'Eggs'),
+                          Product(name: 'Flour'),
+                          Product(name: 'Chocolate chips'),
+                        ],
+                      )));
+        },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
-}
 
-Column _buildButtonColumn(Color color, IconData icon, String label) {
-  return Column(
-    mainAxisSize: MainAxisSize.min,
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Icon(icon, color: color),
-      Container(
-        margin: const EdgeInsets.only(top: 8),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-            color: color,
-          ),
+  layoutDemoButton(BuildContext context) {
+    return Flexible(
+      fit: FlexFit.tight,
+      flex: 1,
+      child: ElevatedButton(
+        child: Row(
+          children: <Widget>[
+            Icon(
+              Icons.travel_explore  ,
+              color: Colors.white,
+            ),
+            SizedBox(
+              width: 8.0,
+            ),
+            const Text("Travel"),
+          ],
         ),
-      )
-    ],
-  );
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Travel()));
+        },
+      ),
+    );
+  }
+
+
 }
