@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:layouts_demo/screens/layout_demo.dart';
 import 'package:layouts_demo/screens/shopping_list.dart';
 
-
 void main() {
   runApp(const MaterialApp(
     home: MyApp(),
@@ -20,35 +19,30 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    const appName = 'My Mix App';
-
     return MaterialApp(
-      title: appName,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.lightBlue[800],
-        fontFamily: 'Georgia',
-        textTheme: const TextTheme(
-          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-          headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: Colors.lightBlue[800],
+          fontFamily: 'Georgia',
+          textTheme: const TextTheme(
+            headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+            headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+            bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+          ),
         ),
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(""),
-        ),
-        body: buildBody(context),
-      )
-    );
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text(""),
+          ),
+          body: buildBody(context),
+        ));
   }
-
-
 
   buildBody(BuildContext context) {
     return Column(
       children: [
-        Expanded(child: Row(children: [
+        Expanded(
+            child: Row(children: [
           shoppingListButton(context),
           layoutDemoButton(context),
         ])),
@@ -61,10 +55,14 @@ class _MyAppState extends State<MyApp> {
       fit: FlexFit.tight,
       flex: 1,
       child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            primary: Colors.blue, // background
+            onPrimary: Colors.white, // foreground
+            minimumSize: const Size(0, 65)),
         child: Row(
           children: <Widget>[
             Icon(
-              Icons.checklist  ,
+              Icons.checklist,
               color: Colors.white,
             ),
             SizedBox(
@@ -94,10 +92,15 @@ class _MyAppState extends State<MyApp> {
       fit: FlexFit.tight,
       flex: 1,
       child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            primary: Colors.lightBlueAccent, // background
+            onPrimary: Colors.white, // foreground
+            minimumSize: const Size(0, 65)
+        ),
         child: Row(
           children: <Widget>[
             Icon(
-              Icons.travel_explore  ,
+              Icons.travel_explore,
               color: Colors.white,
             ),
             SizedBox(
@@ -108,13 +111,9 @@ class _MyAppState extends State<MyApp> {
         ),
         onPressed: () {
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Travel()));
+              context, MaterialPageRoute(builder: (context) => Travel()));
         },
       ),
     );
   }
-
-
 }
