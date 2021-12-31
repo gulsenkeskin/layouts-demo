@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:layouts_demo/screens/gestureDetector_demo.dart';
 import 'package:layouts_demo/screens/layout_demo.dart';
 import 'package:layouts_demo/screens/shopping_list.dart';
 
@@ -45,6 +46,10 @@ class _MyAppState extends State<MyApp> {
             child: Row(children: [
           shoppingListButton(context),
           layoutDemoButton(context),
+        ])),
+        Expanded(
+            child: Row(children: [
+          tapboxAButton(context),
         ])),
       ],
     );
@@ -95,8 +100,7 @@ class _MyAppState extends State<MyApp> {
         style: ElevatedButton.styleFrom(
             primary: Colors.black45, // background
             onPrimary: Colors.white, // foreground
-            minimumSize: const Size(0, 65)
-        ),
+            minimumSize: const Size(0, 65)),
         child: Row(
           children: <Widget>[
             Icon(
@@ -112,6 +116,35 @@ class _MyAppState extends State<MyApp> {
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => Travel()));
+        },
+      ),
+    );
+  }
+
+  tapboxAButton(BuildContext context) {
+    return Flexible(
+      fit: FlexFit.tight,
+      flex: 1,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            primary: Colors.black45, // background
+            onPrimary: Colors.white, // foreground
+            minimumSize: const Size(0, 65)),
+        child: Row(
+          children: <Widget>[
+            Icon(
+              Icons.travel_explore,
+              color: Colors.white,
+            ),
+            SizedBox(
+              width: 8.0,
+            ),
+            const Text("TapboxA"),
+          ],
+        ),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => ParentWidget()));
         },
       ),
     );
