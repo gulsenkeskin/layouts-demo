@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
       flex: 1,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Colors.blue, // background
+            primary: Colors.black54, // background
             onPrimary: Colors.white, // foreground
             minimumSize: const Size(0, 65)),
         child: Row(
@@ -93,7 +93,7 @@ class _MyAppState extends State<MyApp> {
       flex: 1,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Colors.lightBlueAccent, // background
+            primary: Colors.black45, // background
             onPrimary: Colors.white, // foreground
             minimumSize: const Size(0, 65)
         ),
