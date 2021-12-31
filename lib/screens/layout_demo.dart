@@ -78,13 +78,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView(
           children: [
             //const Image(image: AssetImage('images/pamukkale.jpg')),
-            // Image.asset(
-            //  'images/pamukkale.jpg',
-            // width: 600,
-            //height: 240,
-            //
-            // fit: BoxFit.cover,
-            //),
+            Image.asset(
+              'images/pamukkale.jpg',
+              width: 600,
+              height: 240,
+              fit: BoxFit.cover,
+            ),
             titleSection(_favoriteCount, _isFavorited),
             buttonSection,
             textSection,
@@ -120,7 +119,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.grey[500],
                       ),
                     ),
-
                   ],
                 ),
                 Column(

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:layouts_demo/screens/cookBook_demo.dart';
 import 'package:layouts_demo/screens/gestureDetector_demo.dart';
 import 'package:layouts_demo/screens/layout_demo.dart';
 import 'package:layouts_demo/screens/shopping_list.dart';
@@ -42,15 +43,10 @@ class _MyAppState extends State<MyApp> {
   buildBody(BuildContext context) {
     return Column(
       children: [
-        Expanded(
-            child: Row(children: [
-          shoppingListButton(context),
-          layoutDemoButton(context),
-        ])),
-        Expanded(
-            child: Row(children: [
-          tapboxAButton(context),
-        ])),
+        shoppingListButton(context),
+        layoutDemoButton(context),
+        tapboxAButton(context),
+        cookbookButton(context),
       ],
     );
   }
@@ -61,9 +57,9 @@ class _MyAppState extends State<MyApp> {
       flex: 1,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Colors.black54, // background
+            primary: Colors.blueGrey, // background
             onPrimary: Colors.white, // foreground
-            minimumSize: const Size(0, 65)),
+            ),
         child: Row(
           children: <Widget>[
             Icon(
@@ -98,9 +94,9 @@ class _MyAppState extends State<MyApp> {
       flex: 1,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Colors.black45, // background
+            primary: Colors.white12, // background
             onPrimary: Colors.white, // foreground
-            minimumSize: const Size(0, 65)),
+            ),
         child: Row(
           children: <Widget>[
             Icon(
@@ -127,19 +123,19 @@ class _MyAppState extends State<MyApp> {
       flex: 1,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            primary: Colors.black45, // background
+            primary: Colors.blueGrey, // background
             onPrimary: Colors.white, // foreground
-            minimumSize: const Size(0, 65)),
+           ),
         child: Row(
           children: <Widget>[
             Icon(
-              Icons.travel_explore,
+              Icons.flutter_dash,
               color: Colors.white,
             ),
             SizedBox(
               width: 8.0,
             ),
-            const Text("TapboxA"),
+            const Text("TapBox"),
           ],
         ),
         onPressed: () {
@@ -149,4 +145,34 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
+
+  cookbookButton(BuildContext context) {
+    return Flexible(
+      fit: FlexFit.tight,
+      flex: 1,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: Colors.white12, // background
+          onPrimary: Colors.white, // foreground
+        ),
+        child: Row(
+          children: <Widget>[
+            Icon(
+              Icons.dining ,
+              color: Colors.white,
+            ),
+            SizedBox(
+              width: 8.0,
+            ),
+            const Text("Cook Book"),
+          ],
+        ),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => CookBook()));
+        },
+      ),
+    );
+  }
+
 }
